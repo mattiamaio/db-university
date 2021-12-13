@@ -5,7 +5,7 @@ CREATE TABLE `departments` (
 	`id` INT NOT NULL AUTO_INCREMENT,
 	`name` VARCHAR(100) NOT NULL,
 	`address` VARCHAR(255),
-	`phone` INT(20),
+	`phone` INT,
 	`email` VARCHAR(100),
 	`website` VARCHAR (255),
 	`head_of_department` VARCHAR(100),
