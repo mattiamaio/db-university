@@ -45,10 +45,45 @@ CREATE TABLE `teachers`(
 	PRIMARY KEY (`id`)
 );
 
+-- tabella ponte
 CREATE TABLE `courses_teachers`(
 	`courses_id` INT NOT NULL,
 	`teachers_id` INT NOT NULL,
 	PRIMARY KEY (`courses_id`,`teachers_id`),
 	FOREIGN KEY (`courses_id`) REFERENCES courses(`id`),
 	FOREIGN KEY (`teachers_id`) REFERENCES teachers (`id`)
+);
+
+CREATE TABLE `student`(
+	`id` INT NOT NULL AUTO_INCREMENT,
+	`name` VARCHAR(100) NOT NULL,
+	`surname` VARCHAR(100) NOT NULL,
+	`date_of_birth` DATE NOT NULL,
+	`fiscal_code` CHAR(16) NOT NULL,
+	`enrolment_date` DATE NOT NULL,
+	`registration_number` INT NOT NULL,
+	`email` VARCHAR(100) NOT NULL,
+	`degrees_id` INT,
+	PRIMARY KEY (`id`),
+	FOREIGN KEY (`degrees_id`) REFERENCES degrees (`id`)
+);
+
+CREATE TABLE `exams`(
+	`id` INT NOT NULL AUTO_INCREMENT,
+	`date` DATE NOT NULL,
+	`hour` TIME NOT NULL,
+	`location` VARCHAR(255) NOT NULL,
+	`address` VARCHAR(255) NOT NULL,
+	`courses_id` INT,
+	PRIMARY KEY (`id`),
+	FOREIGN KEY (`courses_id`) REFERENCES courses (`id`)
+);
+
+CREATE TABLE `vote` (
+	`student_id` INT NOT NULL,
+	`exams_id` INT NOT NULL,
+	`vote` INT NOT NULL,
+	PRIMARY KEY (`student_id` ,`exams_id`),
+	FOREIGN KEY (`student_id`) REFERENCES student (`id`),
+	FOREIGN KEY (`exams_id`) REFERENCES exams (`id`)
 );
